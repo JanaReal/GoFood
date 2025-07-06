@@ -1,8 +1,9 @@
+require('dotenv').config();
 
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://gofood:gofood%40123@cluster0.xpkohvx.mongodb.net/godfoodmern?retryWrites=true&w=majority&appName=Cluster0"
-
+const mongoURI = process.env.MONGO_URI;
 mongoose.set('strictQuery', true); // or false depending on your preference
+
 
 
 const mongoDB = async () => {

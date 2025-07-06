@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 const express = require('express')
 const router = express.Router();
@@ -6,7 +7,7 @@ const { body, validationResult } = require('express-validator');
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const jwtSecret = "ThisIsADemoFullStackAppForMyFirstImplementationProject";
+const jwtSecret = process.env.JWT_SECRET;
 
 
 router.post("/createuser",
