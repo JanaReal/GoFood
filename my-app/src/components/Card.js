@@ -1,5 +1,5 @@
 import { Button } from 'bootstrap/dist/js/bootstrap.bundle';
-import React, { useState ,useRef,useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { data } from 'react-router-dom';
 import { useDispatchCart, useCart } from './ContextReducer';
 
@@ -8,30 +8,34 @@ export default function Card(props) {
   let data = useCart();
   const priceRef = useRef();
   let dispatch = useDispatchCart();
-  let foodItem = props.foodItem || {};
+
 
 
   const handleAddToCart = async () => {
-    if (!props.foodItem) {
-
-      console.error("Food item not loaded yet!");
-      return;
-
+    let food = [];
+    for (const item of data) {
+      if (item.id === props.foodItem._id && item.size === size) {
+        food = item;
+        break;
+      }
     }
-
+    if (food != [] && food.size === size) {
+      await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty});
+      return;
+    }
     await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size });
-    console.log(data);
 
   }
+  
   let options = props.options;
   let priceOptions = Object.keys(options);
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState("")
 
   let finalPrice = qty * parseInt(options[size]);
-  useEffect(()=>{
+  useEffect(() => {
     setSize(priceRef.current.value)
-  },[])
+  }, [])
 
 
   return (

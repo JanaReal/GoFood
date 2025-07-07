@@ -35,7 +35,7 @@ export default function Cart() {
                             <td>{food.price}</td>
                             <td>
                                 <button type="button" className="btn p-0">
-                                  <img src='https://img.icons8.com/?size=100&id=85081&format=png&color=000000' alt="delete" onClick={() => { }} />
+                                  <img src='https://img.icons8.com/?size=100&id=85081&format=png&color=000000' alt="delete" onClick={() => { dispatch({ type: "REMOVE",index:index}) }} />
                                 </button>
                             </td>
                         </tr>
