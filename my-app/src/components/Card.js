@@ -20,7 +20,7 @@ export default function Card(props) {
       }
     }
     if (food != [] && food.size === size) {
-      await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty});
+      await dispatch({ type: "UPDATE", id: props.foodItem._id,size: size, price: finalPrice, qty: qty});
       return;
     }
     await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size });

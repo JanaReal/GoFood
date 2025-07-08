@@ -1,28 +1,34 @@
 import React, { createContext, useReducer, useContext } from 'react'
 
 
-const CartStateContext = createContext();
+const CartStateContext = createContext([]);
 const CartDispatchContext = createContext();
 
 const reducer = (state, action) => {
     switch (action.type) {
         case "ADD":
             return [...state, { id: action.id, name: action.name, qty: action.qty, size: action.size, price: action.price, imp: action.img }];
+
         case "REMOVE":
             let newArr = [...state]
             newArr.splice(action.index, 1)
             return newArr;
+
         case "UPDATE":
-            let arr = [...state]
-            arr.find((food, index) => {
-                if (food.id === action.id) {
-                    arr[index] = { ...food, qty: parseInt(action.qty) + food.qty, price: action.price + food.price }
+            return state.map((food) => {
+                if (food.id === action.id && food.size === action.size) {
+                    return {
+                        ...food,
+                        qty: parseInt(food.qty) + parseInt(action.qty),
+                        price: parseInt(food.price) + parseInt(action.price)
+                    };
                 }
-            })
-            return arr
+                return food;
+            });
 
-
-
+        case "DROP":
+            let empArr = [];
+            return empArr;
 
         default:
             console.log("error in reducer");
