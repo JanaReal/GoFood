@@ -8,7 +8,8 @@ const express = require('express')
 const mongoDB = require('./db')
 const app = express()
 const port = 5000
-
+//const myOrderDataRoute = require('./routes/OrderData');
+const myOrderRoute = require('./routes/MyOrder'); // adjust path
 
 const cors = require('cors');
 app.use(cors());
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use('/api',require("./Routes/LoginAndCreateUser"));
 app.use('/api',require("./Routes/DisplayData"));
-app.use('/api',require("./Routes/OrderData"));
+app.use('/api/auth', myOrderRoute);
 
 
 
