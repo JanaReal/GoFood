@@ -9,7 +9,7 @@ const mongoDB = require('./db')
 const app = express()
 const port = 5000
 //const myOrderDataRoute = require('./routes/OrderData');
-const myOrderRoute = require('./routes/MyOrder'); // adjust path
+const myOrderRoute = require('./routes/myOrderData.js'); // adjust path
 
 const cors = require('cors');
 app.use(cors());
