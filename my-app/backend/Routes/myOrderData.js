@@ -2,8 +2,11 @@ const express = require('express')
 const router = express.Router();
 const Order = require('../models/Orders');
 const { findOneAndUpdate } = require('../models/User');
+const cors = require("cors");
+app.use(cors());
 
-router.post('/orderData', async (req, res) => {
+
+router.post('/myOrderData', async (req, res) => {
     let data = req.body.order_data
     await data.splice(0, 0, { Order_data: req.body.email })
     //console.log(data);
@@ -37,6 +40,25 @@ router.post('/orderData', async (req, res) => {
 
     }
 })
+
+
+router.post('/OrderData', async (req, res) => {
+
+    try {
+        let myData = await Order.findOne({'email':req.body.email})
+        res.json({orderData: myData })
+        
+    } catch (error) {
+        res.send("Server Error", error.message);
+    }
+})
+
+router.post('/myOrderData', async (req, res) => {
+  console.log("Received request to /myOrderData");
+  console.log("Email:", req.body.email);
+  
+});
+
 
 module.exports = router;
 
